@@ -1,0 +1,71 @@
+name: Upsert Cloudflare DNS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upsert-apex-cname:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ZONE_ID: 28d2e5c7ea18e2e76bb69790c9916b81
+      RECORD_NAME: unlockintelligencehq.com
+      RECORD_CONTENT: unlock-intelligence-hq.pages.dev
+
+    steps:
+      - name: Verify token is present
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN}" ]; then
+            echo "Missing CLOUDFLARE_API_TOKEN repository secret."
+            exit 1
+          fi
+
+      - name: Upsert apex CNAME for Pages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          api="https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/dns_records"
+          auth_header="Authorization: Bearer ${CLOUDFLARE_API_TOKEN}"
+          json_header="Content-Type: application/json"
+
+          call_api() {
+            local method="$1"
+            local url="$2"
+            local body="${3:-}"
+
+            if [ -n "$body" ]; then
+              response="$(curl -sS -X "$method" "$url" -H "$auth_header" -H "$json_header" --data "$body")"
+            else
+              response="$(curl -sS -X "$method" "$url" -H "$auth_header" -H "$json_header")"
+            fi
+
+            success="$(echo "$response" | jq -r '.success // false')"
+            if [ "$success" != "true" ]; then
+              echo "$response" | jq .
+              exit 1
+            fi
+
+            echo "$response"
+          }
+
+          existing="$(call_api GET "${api}?name=${RECORD_NAME}&per_page=100")"
+
+          echo "$existing" | jq -r '.result[] | select(.type == "A" or .type == "AAAA") | .id' | while read -r record_id; do
+            if [ -n "$record_id" ]; then
+              call_api DELETE "${api}/${record_id}" >/dev/null
+            fi
+          done
+
+          cname_id="$(echo "$existing" | jq -r '.result[] | select(.type == "CNAME") | .id' | head -n 1)"
+          payload="$(jq -n \
+            --arg type "CNAME" \
+            --arg name "$RECORD_NAME" \
+            --arg content "$RECORD_CONTENT" \
+            '{type: $type, name: $name, content: $content, proxied: true, ttl: 1}')"
+
+          if [ -n "$cname_id" ] && [ "$cname_id" != "null" ]; then
+            call_api PUT "${api}/${cname_id}" "$payload" | jq .
+          else
+            call_api POST "$api" "$payload" | jq .
+          fi

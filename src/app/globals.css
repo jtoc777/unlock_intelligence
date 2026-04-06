@@ -1,0 +1,236 @@
+/*
+ * What: Global tokens, base styles, utilities.
+ * Why: Single design system entry for Tailwind v4.
+ * How: Imports tailwind, theme vars, section utilities.
+ * Deps: tailwindcss, tw-animate-css, shadcn tailwind.
+ */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-amber: var(--amber);
+  --color-sage: var(--sage);
+  --color-text-muted: var(--text-muted);
+}
+
+:root {
+  --background: oklch(0.14 0.015 245);
+  --foreground: oklch(0.985 0 0);
+  --card: rgba(255,255,255,0.03);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.20 0.015 245);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.45 0.08 245);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.274 0.01 245);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.274 0.01 245);
+  --muted-foreground: oklch(0.705 0.015 245);
+  --accent: oklch(0.75 0.10 80);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.628 0.258 29.234);
+  --border: rgba(255,255,255,0.06);
+  --input: rgba(255,255,255,0.06);
+  --ring: oklch(0.45 0.08 245);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+  }
+}
+
+/* Custom design tokens — Navy + Amber palette */
+:root {
+  --nav-h: 64px;
+  --navy: #94BDE0;
+  --navy-deep: #1E3A5F;
+  --amber: #C49A3C;
+  --sage: #8FB8A3;
+  --sage-deep: #6B9080;
+  --text-muted: #71717A;
+  --grad-primary: linear-gradient(135deg, #1E3A5F, #2A5080);
+  --grad-text: linear-gradient(135deg, #94BDE0, #C49A3C);
+}
+
+/* Gradient text utility */
+.grad-text {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Light section theme override */
+.theme-light {
+  --background: #FAFAF9;
+  --foreground: #18181B;
+  --card: rgba(0,0,0,0.02);
+  --card-foreground: #18181B;
+  --muted-foreground: #52525B;
+  --border: rgba(0,0,0,0.06);
+  --input: rgba(0,0,0,0.06);
+}
+
+.theme-light {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Glass card */
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+}
+
+/* Label mono */
+.label-mono {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+/* Scroll reveal base */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pulse animation for status dot */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Gradient dividers */
+.divider-dark-to-light {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.06) 20%, rgba(255,255,255,0.06) 80%, transparent);
+}
+.divider-light-to-dark {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.06) 20%, rgba(0,0,0,0.06) 80%, transparent);
+}
+
+/*
+ * Dark tone variations — navy-tinted, each section its own shade.
+ * Creates the sense of moving through spaces, not one flat void.
+ */
+.tone-hero {
+  background-color: oklch(0.14 0.02 245);
+}
+.tone-team {
+  background-color: oklch(0.155 0.012 230);
+}
+.tone-deliverables {
+  background-color: oklch(0.145 0.025 245);
+}
+.tone-curriculum {
+  background-color: oklch(0.135 0.015 250);
+}
+.tone-enroll {
+  background-color: oklch(0.13 0.022 248);
+}
+.tone-faq {
+  background-color: oklch(0.16 0.008 240);
+}
+.tone-cta {
+  background: linear-gradient(160deg, oklch(0.17 0.04 245), oklch(0.12 0.03 260));
+}
+
+/* Selection color */
+::selection {
+  background: rgba(30,58,95,0.4);
+  color: #FAFAFA;
+}
+
+/* Scroll padding for sticky bars */
+html {
+  scroll-padding-top: 5rem;
+  scroll-padding-bottom: 4rem;
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 4rem;
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* iOS Safari tap highlight removal */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Safe area insets for notched devices */
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Touch action for reduced tap delay on mobile */
+a, button, [role="button"], input, select, textarea, summary {
+  touch-action: manipulation;
+}

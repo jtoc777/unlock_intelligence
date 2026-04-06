@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 50" fill="none">
+  <!-- Garner "G" monogram / abstract mark -->
+  <g transform="translate(4, 5)">
+    <!-- Rounded "G" shape made from an arc with a horizontal bar -->
+    <path d="M20 2 A16 16 0 1 0 20 38 L20 22 L28 22" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- "garner" in bold lowercase -->
+  <text x="44" y="28" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="white" letter-spacing="0.5">garner</text>
+  <!-- "health" in lighter weight, spaced -->
+  <text x="170" y="28" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="24" font-weight="300" fill="white" letter-spacing="0.5">health</text>
+</svg>

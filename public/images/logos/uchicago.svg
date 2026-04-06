@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60" fill="none">
+  <!-- Shield/Crest -->
+  <g transform="translate(2, 2)">
+    <!-- Shield body -->
+    <path d="M0 0 h32 v22 c0 10 -8 18 -16 22 c-8 -4 -16 -12 -16 -22 V0z" fill="none" stroke="white" stroke-width="2"/>
+    <!-- Inner shield border -->
+    <path d="M3 3 h26 v19 c0 8.5 -6.5 15 -13 18.5 c-6.5 -3.5 -13 -10 -13 -18.5 V3z" fill="none" stroke="white" stroke-width="0.7"/>
+    <!-- Phoenix body - rising bird with spread wings -->
+    <path d="M16 10
+      c-1.5 -3 -5 -4.5 -5 -4.5
+      c2 1 3 3 3.5 4.5
+      c-2 -1.5 -5 -2 -5 -2
+      c2.5 1 4 2.5 4.8 4
+      c-0.5 0.5 -0.8 1.2 -0.8 2
+      c0 1.5 1 2.5 2 3
+      l-3.5 8.5
+      l5 -4
+      l5 4
+      l-3.5 -8.5
+      c1 -0.5 2 -1.5 2 -3
+      c0 -0.8 -0.3 -1.5 -0.8 -2
+      c0.8 -1.5 2.3 -3 4.8 -4
+      c0 0 -3 0.5 -5 2
+      c0.5 -1.5 1.5 -3.5 3.5 -4.5
+      c0 0 -3.5 1.5 -5 4.5z"
+      fill="white"/>
+    <!-- Phoenix head -->
+    <circle cx="16" cy="12" r="1.3" fill="white"/>
+    <!-- Flames at base -->
+    <path d="M10 32 c1 -2 2 -3 3 -2.5 c-0.5 -2 0.5 -3 1.5 -2 c0 -2 1 -3 1.5 -2 c0.5 -1 1.5 0 1.5 0 c0 0 1 -1 1.5 0 c0.5 -1 1.5 0 1.5 2 c1 -1 2 0 1.5 2 c1 -0.5 2 0.5 3 2.5" fill="none" stroke="white" stroke-width="0.7"/>
+  </g>
+  <!-- Text wordmark - classic UChicago layout -->
+  <text x="46" y="21" font-family="Georgia, 'Times New Roman', 'Palatino Linotype', serif" font-size="10.5" font-weight="400" fill="white" letter-spacing="4.2">THE UNIVERSITY OF</text>
+  <text x="46" y="44" font-family="Georgia, 'Times New Roman', 'Palatino Linotype', serif" font-size="20" font-weight="400" fill="white" letter-spacing="5">CHICAGO</text>
+</svg>

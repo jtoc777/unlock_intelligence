@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50" fill="none">
+  <!-- Digital Realty icon - overlapping/interlocking rectangles forming a stylized building/data center -->
+  <g fill="none" stroke="white" transform="translate(4, 8)">
+    <!-- Three vertical bars suggesting data center/building structure -->
+    <rect x="0" y="8" width="8" height="26" rx="1" fill="white" opacity="0.4"/>
+    <rect x="10" y="3" width="8" height="31" rx="1" fill="white" opacity="0.65"/>
+    <rect x="20" y="0" width="8" height="34" rx="1" fill="white" opacity="0.9"/>
+  </g>
+  <!-- Wordmark - clean corporate sans-serif -->
+  <text x="42" y="33" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="24" font-weight="300" fill="white" letter-spacing="1">Digital Realty</text>
+</svg>

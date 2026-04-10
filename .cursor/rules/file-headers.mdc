@@ -1,0 +1,33 @@
+---
+description: Four-line file headers (What/Why/How/Deps) on major source files
+globs:
+  - "src/**/*.{ts,tsx}"
+  - "src/**/*.css"
+  - "e2e/**/*.ts"
+  - "next.config.ts"
+  - "playwright.config.ts"
+  - "vitest.config.ts"
+  - "vitest.setup.ts"
+  - "eslint.config.mjs"
+  - "postcss.config.mjs"
+alwaysApply: false
+---
+
+# File headers (major files)
+
+When **adding a new** file or **substantially rewriting** a file in the globs above, start it with this header at the **very top** (before imports or `"use client"`; use `/* */` in `.css`).
+
+**Format (exactly four lines, each label once):**
+
+- **What:** what the file does  
+- **Why:** why it exists in this repo  
+- **How:** how it accomplishes that (one short phrase or sentence)  
+- **Deps:** main runtime or build dependencies (packages, key internal modules)
+
+**Length:** Each line’s text after the label must be **fewer than nine words** (eight words max).
+
+**Skip headers** for: generated files, `next-env.d.ts`, and **vendored shadcn/Base UI** primitives under `src/components/ui/` (e.g. `button`, `sheet`, `input`, `select`, `accordion`, `label`, `textarea`, `navigation-menu`). **Do** keep headers on project-owned UI: `glass-card`, `gradient-*`, `logo`, `parallax-orbs`, `scroll-reveal`, `section-wrapper`.
+
+**Tests:** Optional for `**/__tests__/**`; prefer headers on production `src/` and config/e2e listed in globs.
+
+When editing a file that is missing a header and the change is non-trivial, offer to add the header in the same pass.
